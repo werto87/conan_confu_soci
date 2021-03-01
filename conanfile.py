@@ -45,7 +45,7 @@ class ConfuSociConan(ConanFile):
 
     def package(self):
         self.copy("*.h*", dst="include/confu_soci",
-                  src="confu_soci-0.1.1/convenienceFunctionForSoci")
+                  src="confu_soci-0.1.1/confu_soci")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
