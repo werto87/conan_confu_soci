@@ -6,7 +6,7 @@ from conans import ConanFile, CMake, tools
 
 class ConfuSociConan(ConanFile):
     name = "confu_soci"
-    version = "0.1.0"
+    version = "0.1.1"
     license = "BSL-1.0"
     author = "werto87"
     url = "<Package recipe repository url here, for issues about the package>"
@@ -34,18 +34,18 @@ class ConfuSociConan(ConanFile):
 
     def source(self):
         zip_name = "confu_soci_v_0_0_2"
-        download("https://github.com/werto87/confu_soci/archive/v0.1.0.zip", zip_name)
+        download("https://github.com/werto87/confu_soci/archive/v0.1.1.zip", zip_name)
         unzip(zip_name)
         os.unlink(zip_name)
 
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="confu_soci-0.1.0")
+        cmake.configure(source_folder="confu_soci-0.1.1")
         cmake.build()
 
     def package(self):
         self.copy("*.h*", dst="include/confu_soci",
-                  src="confu_soci-0.1.0/convenienceFunctionForSoci")
+                  src="confu_soci-0.1.1/convenienceFunctionForSoci")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
