@@ -16,6 +16,12 @@ class ConfuSociConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
+    scm = {
+        "type": "git",
+        "subfolder": "confu_soci",
+        "url": "https://github.com/werto87/confu_soci.git",
+        "revision": "main"
+    }
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -32,20 +38,14 @@ class ConfuSociConan(ConanFile):
         self.requires("sqlite3/3.34.1")
         self.requires("catch2/2.13.1")
 
-    def source(self):
-        zip_name = "confu_soci_v_0_0_2"
-        download("https://github.com/werto87/confu_soci/archive/v0.2.0.zip", zip_name)
-        unzip(zip_name)
-        os.unlink(zip_name)
-
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="confu_soci-0.2.0")
+        cmake.configure(source_folder="confu_soci")
         cmake.build()
 
     def package(self):
         self.copy("*.h*", dst="include/confu_soci",
-                  src="confu_soci-0.2.0/confu_soci")
+                  src="confu_soci/confu_soci")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
