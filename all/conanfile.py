@@ -6,7 +6,6 @@ from conans import ConanFile, CMake, tools
 
 class ConfuSociConan(ConanFile):
     name = "confu_soci"
-    version = "0.2.0"
     license = "BSL-1.0"
     author = "werto87"
     url = "<Package recipe repository url here, for issues about the package>"
@@ -16,12 +15,10 @@ class ConfuSociConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "cmake"
-    scm = {
-        "type": "git",
-        "subfolder": "confu_soci",
-        "url": "https://github.com/werto87/confu_soci.git",
-        "revision": "main"
-    }
+
+    @property
+    def _source_subfolder(self):
+        return "source_subfolder"
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -32,20 +29,25 @@ class ConfuSociConan(ConanFile):
         self.options["soci"].with_sqlite3 = True
 
     def requirements(self):
-        self.requires("boost/1.75.0")
-        self.requires("soci/4.0.1")
-        self.requires("magic_enum/0.6.6")
+        self.requires("boost/[>=1.73]")
+        self.requires("soci/[>=4.0.1]")
+        self.requires("magic_enum/[>=0.7.2]")
         self.requires("sqlite3/3.34.1")
         self.requires("catch2/2.13.1")
 
+    def source(self):
+        tools.get(**self.conan_data["sources"][self.version])
+        extracted_dir = self.name + "-" + self.version
+        os.rename(extracted_dir, self._source_subfolder)
+
     def build(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="confu_soci")
+        cmake.configure(source_folder=self._source_subfolder)
         cmake.build()
 
     def package(self):
         self.copy("*.h*", dst="include/confu_soci",
-                  src="confu_soci/confu_soci")
+                  src="source_subfolder/confu_soci")
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
         self.copy("*.dylib", dst="lib", keep_path=False)
