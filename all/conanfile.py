@@ -29,10 +29,8 @@ class ConfuSociConan(ConanFile):
         self.options["soci"].with_sqlite3 = True
 
     def requirements(self):
-        self.requires("boost/[>=1.73]")
-        self.requires("soci/[>=4.0.1]")
+        self.requires("soci/[>=4.0.1]@werto87/stable")
         self.requires("magic_enum/[>=0.7.2]")
-        self.requires("sqlite3/3.34.1")
         self.requires("catch2/2.13.1")
 
     def source(self):
