@@ -31,7 +31,6 @@ class ConfuSociConan(ConanFile):
     def requirements(self):
         self.requires("soci/4.0.2@werto87/stable")
         self.requires("magic_enum/[>=0.7.2]")
-        self.requires("catch2/2.13.1")
 
     def source(self):
         tools.get(**self.conan_data["sources"][self.version])
