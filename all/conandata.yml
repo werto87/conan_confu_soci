@@ -14,3 +14,6 @@ sources:
   0.3.1:
     url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.1.tar.gz
     sha256: 826bf0adc58f2dec073eab2eee29bc98658b7fbbe459ad98a1d98d42be6d7608           
+  0.3.2:
+    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.2.tar.gz
+    sha256: 826bf0adc58f2dec073eab2eee29bc98658b7fbbe459ad98a1d98d42be6d7608               
