@@ -38,7 +38,7 @@ class ConfuSociConan(ConanFile):
         self.options["soci"].shared = True
 
     def requirements(self):
-        self.requires("soci/4.0.3") #TODO find out why this can not be found. maybe open an issue on conan
+        self.requires("soci/4.0.3")
         self.requires("magic_enum/[>=0.7.2]")
         self.requires("boost/1.83.0")
 
