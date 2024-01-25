@@ -1,25 +1,4 @@
 sources:
-  0.2.0:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.2.0.tar.gz
-    sha256: 7fe143795d63b42bd59c1cf79210113a70334b8b851258408f9ad6bf2f6b2ae5
-  0.2.1:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.2.1.tar.gz
-    sha256: 54569e4e717e5a0c3947fd78e9162e62c78c187e6899933e2a5dc3ee121a0516
-  0.2.2:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.2.2.tar.gz
-    sha256: 722ec7bb538c8aac44fb1a6e2c52a9a67a5eb46a5b22c8aa83fdae01aa530a99  
-  0.3.0:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.0.tar.gz
-    sha256: bb4ebb7b74ca77f8ee0d785ae0f92332c465a68cdc8aa571b809cd9872008f78  
-  0.3.1:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.1.tar.gz
-    sha256: 826bf0adc58f2dec073eab2eee29bc98658b7fbbe459ad98a1d98d42be6d7608           
-  0.3.2:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.2.tar.gz
-    sha256: 00c7a9845940fc1dd8da1f2733528fd2e68a15e145c9781e6411b93deaece645
-  0.3.3:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.3.tar.gz
-    sha256: 08dbc3a2f4a6d377fe1bea0836fdb66ab2972c5bbf08de21adc7e4977e13a5e6
-  0.3.4:
-    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.4.tar.gz
-    sha256: a24ad07b36b242ab4e7215187f03e293cf9ed5c18be4e5b8509d6f052b719ce6
+  0.3.9:
+    url: https://github.com/werto87/confu_soci/archive/refs/tags/v0.3.9.tar.gz
+    sha256: a470ea9ef79620de6242bea7a7cf9c66e32aef5de3eed9f6d248d39277c8e401

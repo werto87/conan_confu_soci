@@ -1,8 +1,7 @@
 from conan import ConanFile
-from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout
-from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
 from conan.tools.build import check_min_cppstd
+from conan.tools.cmake import CMake
 from conan.tools.files import copy, get
 from conan.tools.layout import basic_layout
 from conan.tools.microsoft import is_msvc
@@ -21,8 +20,8 @@ class ConfuSociConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-    generators = "CMakeToolchain"
-
+    generators = "CMakeDeps", "CMakeToolchain"
+    exports_sources = "CMakeLists.txt", "confu_soci/*"
 
     @property
     def _source_subfolder(self):
@@ -53,13 +52,15 @@ class ConfuSociConan(ConanFile):
 
 
     def package(self):
-        self.copy("*.h*", dst="include/confu_soci",
-                  src="source_subfolder/confu_soci")
-        self.copy("*.dll", dst="bin", keep_path=False)
-        self.copy("*.so", dst="lib", keep_path=False)
-        self.copy("*.dylib", dst="lib", keep_path=False)
-        self.copy("*.a", dst="lib", keep_path=False)
+        copy(self, "*.h*", src=os.path.join(self.source_folder, "confu_soci"),
+            dst=os.path.join(self.package_folder, "include", "confu_soci"))
+        copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(self.package_folder, "licenses"))
+        copy(self, pattern="*.a", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
+        copy(self, pattern="*.so", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
+        copy(self, pattern="*.lib", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
+        copy(self, pattern="*.dll", src=self.build_folder, dst=os.path.join(self.package_folder, "bin"), keep_path=False)
+        copy(self, pattern="*.dylib", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["convenienceFunctionForSoci"]
+        self.cpp_info.libs = ["confu_soci"]
 
