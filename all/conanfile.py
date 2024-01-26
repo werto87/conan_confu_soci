@@ -34,12 +34,11 @@ class ConfuSociConan(ConanFile):
     def configure(self):
         self.options["soci"].with_boost = True
         self.options["soci"].with_sqlite3 = True
-        self.options["soci"].shared = True
 
     def requirements(self):
-        self.requires("soci/4.0.3")
-        self.requires("magic_enum/[>=0.7.2]")
-        self.requires("boost/1.83.0")
+        self.requires("soci/4.0.3",transitive_libs=True, transitive_headers=True)
+        self.requires("magic_enum/[>=0.7.2]",transitive_libs=True, transitive_headers=True)
+        self.requires("boost/1.83.0",transitive_libs=True, transitive_headers=True)
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
@@ -63,4 +62,5 @@ class ConfuSociConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = ["confu_soci"]
+
 

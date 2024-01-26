@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.27)
-project(test_package LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.15)
+project(test_package CXX)
 
 find_package(confu_soci REQUIRED CONFIG)
 
