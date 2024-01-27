@@ -1,7 +1,7 @@
 from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
 from conan.tools.build import check_min_cppstd
-from conan.tools.cmake import CMake
+from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.files import copy, get
 from conan.tools.layout import basic_layout
 from conan.tools.microsoft import is_msvc
@@ -21,11 +21,10 @@ class ConfuSociConan(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "CMakeDeps", "CMakeToolchain"
+    #TODO enable after adding isntall to cmake
     exports_sources = "CMakeLists.txt", "confu_soci/*"
-
-    @property
-    def _source_subfolder(self):
-        return "source_subfolder"
+def layout(self):
+    cmake_layout(self, src_folder="confu_soci")
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -49,7 +48,12 @@ class ConfuSociConan(ConanFile):
         cmake.configure()
         cmake.build()
 
+#TODO enable after adding isntall to cmake
+    # def package(self):
+    #     cmake = CMake(self)
+    #     cmake.install()
 
+    #TODO remove after adding isntall to cmake
     def package(self):
         copy(self, "*.h*", src=os.path.join(self.source_folder, "confu_soci"),
             dst=os.path.join(self.package_folder, "include", "confu_soci"))
