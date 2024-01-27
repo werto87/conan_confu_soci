@@ -16,18 +16,14 @@ class ConfuSociConan(ConanFile):
     author = "werto87"
     url = "<Package recipe repository url here, for issues about the package>"
     description = "convenience functions for reducing boilerplate while working with socis orm feature"
-    topics = ("convenience function orm")
+    topics = "convenience function orm"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     generators = "CMakeDeps", "CMakeToolchain"
-    #TODO enable after adding isntall to cmake
-    exports_sources = "CMakeLists.txt", "confu_soci/*"
 
     def layout(self):
-        #TODO make this recipe generic and use it as template
-        # cmake_layout(self, src_folder="confu_soci-0.3.13")
-        cmake_layout(self, src_folder=self.name+"-"+self.version)
+        cmake_layout(self, src_folder=self.name+"-"+str(self.version))
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -45,27 +41,14 @@ class ConfuSociConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version],strip_root=True)
 
-
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
 
-#TODO enable after adding isntall to cmake
-    # def package(self):
-    #     cmake = CMake(self)
-    #     cmake.install()
-
-    #TODO remove after adding isntall to cmake
     def package(self):
-        copy(self, "*.h*", src=os.path.join(self.source_folder, "confu_soci"),
-            dst=os.path.join(self.package_folder, "include", "confu_soci"))
-        copy(self, "LICENSE", src=self.source_folder, dst=os.path.join(self.package_folder, "licenses"))
-        copy(self, pattern="*.a", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
-        copy(self, pattern="*.so", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
-        copy(self, pattern="*.lib", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
-        copy(self, pattern="*.dll", src=self.build_folder, dst=os.path.join(self.package_folder, "bin"), keep_path=False)
-        copy(self, pattern="*.dylib", src=self.build_folder, dst=os.path.join(self.package_folder, "lib"), keep_path=False)
+        cmake = CMake(self)
+        cmake.install()
 
     def package_info(self):
         self.cpp_info.libs = ["confu_soci"]
