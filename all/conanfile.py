@@ -23,8 +23,11 @@ class ConfuSociConan(ConanFile):
     generators = "CMakeDeps", "CMakeToolchain"
     #TODO enable after adding isntall to cmake
     exports_sources = "CMakeLists.txt", "confu_soci/*"
-def layout(self):
-    cmake_layout(self, src_folder="confu_soci")
+
+    def layout(self):
+        #TODO make this recipe generic and use it as template
+        # cmake_layout(self, src_folder="confu_soci-0.3.13")
+        cmake_layout(self, src_folder=self.name+"-"+self.version)
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -40,7 +43,7 @@ def layout(self):
         self.requires("boost/1.83.0",transitive_libs=True, transitive_headers=True)
 
     def source(self):
-        get(self, **self.conan_data["sources"][self.version], strip_root=True)
+        get(self, **self.conan_data["sources"][self.version],strip_root=True)
 
 
     def build(self):
