@@ -1,22 +1,16 @@
 from conan import ConanFile
-from conan.errors import ConanInvalidConfiguration
-from conan.tools.build import check_min_cppstd
 from conan.tools.cmake import CMake, cmake_layout
-from conan.tools.files import copy, get
-from conan.tools.layout import basic_layout
-from conan.tools.microsoft import is_msvc
-from conan.tools.scm import Version
-import os
+from conan.tools.files import get
 
 
+required_conan_version = ">=1.51.1"
 
 class ConfuSociConan(ConanFile):
     name = "confu_soci"
     license = "BSL-1.0"
-    author = "werto87"
-    url = "<Package recipe repository url here, for issues about the package>"
     description = "convenience functions for reducing boilerplate while working with socis orm feature"
     topics = "convenience function orm"
+    url = "<Package recipe repository url here, for issues about the package>"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
