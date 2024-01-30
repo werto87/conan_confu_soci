@@ -16,8 +16,7 @@ class ConfuSociConan(ConanFile):
     default_options = {"shared": False, "fPIC": True}
     generators = "CMakeDeps", "CMakeToolchain"
 
-    def layout(self):
-        cmake_layout(self, src_folder=self.name+"-"+str(self.version))
+
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -29,7 +28,7 @@ class ConfuSociConan(ConanFile):
 
     def requirements(self):
         self.requires("soci/4.0.3",transitive_libs=True, transitive_headers=True)
-        self.requires("magic_enum/[>=0.7.2]",transitive_libs=True, transitive_headers=True)
+        self.requires("magic_enum/[>=0.9.5 <10]",transitive_libs=True, transitive_headers=True)
         self.requires("boost/1.83.0",transitive_libs=True, transitive_headers=True)
 
     def source(self):
@@ -40,9 +39,14 @@ class ConfuSociConan(ConanFile):
         cmake.configure()
         cmake.build()
 
+    def layout(self):
+        cmake_layout(self, src_folder=self.name+"-"+str(self.version))
+
     def package(self):
         cmake = CMake(self)
         cmake.install()
+
+
 
     def package_info(self):
         self.cpp_info.libs = ["confu_soci"]
