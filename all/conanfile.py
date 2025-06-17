@@ -29,8 +29,7 @@ class ConfuSociConan(ConanFile):
     def requirements(self):
         self.requires("soci/4.1.2",transitive_headers=True)
         self.requires("magic_enum/[>=0.9.5 <10]",transitive_headers=True)
-        self.requires("boost/1.83.0")
-        # self.requires("sqlite3/3.44.2", transitive_headers=True)
+        self.requires("boost/1.86.0")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version],strip_root=True)
